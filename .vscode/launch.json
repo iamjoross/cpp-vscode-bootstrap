@@ -1,0 +1,49 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+      {
+        "name": "Src: (lldb) Launch",
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${workspaceFolder}/dist/bin/debug/DSA",
+          "args": [],
+          "stopAtEntry": false,
+          "cwd": "${workspaceFolder}",
+        //   "${fileDirname}/${fileBasenameNoExtension}",
+          "environment": [],
+          "externalConsole": false,
+          "MIMode": "lldb",
+          "setupCommands": [
+              {
+                  "description": "Enable pretty-printing for gdb",
+                  "text": "-enable-pretty-printing",
+                  "ignoreFailures": true
+              }
+          ],
+          "preLaunchTask": "Src: Build (debug)",
+          "internalConsoleOptions": "neverOpen"
+      },
+      {
+        "name": "Test: (lldb) Launch",
+          "type": "cppdbg",
+          "request": "launch",
+          "program": "${workspaceFolder}/dist/bin/debug/DSA",
+          "args": [],
+          "stopAtEntry": false,
+          "cwd": "${workspaceFolder}",
+        //   "${fileDirname}/${fileBasenameNoExtension}",
+          "environment": [],
+          "externalConsole": false,
+          "MIMode": "lldb",
+          "setupCommands": [
+              {
+                  "description": "Enable pretty-printing for gdb",
+                  "text": "-enable-pretty-printing",
+                  "ignoreFailures": true
+              }
+          ],
+          "preLaunchTask": "Test: Build (debug)",
+          "internalConsoleOptions": "neverOpen"
+      }
+  ]
+}

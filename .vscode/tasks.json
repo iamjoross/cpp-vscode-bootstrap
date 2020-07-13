@@ -1,0 +1,108 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+      // Build sources
+      // =============================================
+      {
+          "label": "Src: Build (debug)",
+          "type": "shell",
+          "command": "./scripts/build.sh --build_type=debug",
+          "group": "build",
+          "problemMatcher": []  // Prevents VSCode to ask for scanning for errors in the output
+      },
+      {
+          "label": "Src: Build (release)",
+          "type": "shell",
+          "command": "./scripts/build.sh --build_type=release",
+          "group": "build",
+          "problemMatcher": []
+      },
+
+      // Run sources
+      // ==============================================
+      {
+          "label": "Src: Run (debug)",
+          "type": "shell",
+          "command": "./dist/bin/debug/DSA",
+          "group": "build",
+          // Will run build task beforehand
+          "dependsOn": [
+              "Src: Build (debug)"
+          ],
+          "problemMatcher": []
+      },
+      {
+          "label": "Src: Run (release)",
+          "type": "shell",
+          "command": "./dist/bin/release/DSA",
+          "group": "build",
+          "dependsOn": [
+              "Src: Build (release)"
+          ],
+          "problemMatcher": []
+      },
+
+      // Build tests
+      // =============================================
+      {
+          "label": "Test: Build (debug)",
+          "type": "shell",
+          "command": "./scripts/build.sh --build_type=debug --build_tests=ON",
+          "group": "build",
+          "problemMatcher": []  // Prevents VSCode to ask for scanning for errors in the output
+      },
+      {
+          "label": "Test: Build (release)",
+          "type": "shell",
+          "command": "./scripts/build.sh --build_type=release --build_tests=ON",
+          "group": "build",
+          "problemMatcher": []
+      },
+
+      // Run Tests
+      // ==============================================
+      {
+          "label": "Test: Run (release)",
+          "type": "shell",
+          "command": "./dist/bin/release/testDSA",
+          "group": "build",
+          "dependsOn": [
+              "Test: Build (release)"
+          ],
+          "problemMatcher": []
+      },
+      {
+          "label": "BRT: Run Test(debug)",
+          "type": "shell",
+          "command": "./dist/bin/debug/testDSA",
+          "group": "build",
+          "dependsOn": [
+              "Test: Build (debug)"
+          ],
+          "problemMatcher": []
+      },
+      {
+        "label": "Build All Sources",
+        "type": "shell",
+        "command": "./scripts/build.sh --build_type=debug && ./scripts/build.sh --build_type=release",
+        "group": "build",
+        "dependsOn": [
+            "Test: Build (release)"
+        ],
+        "problemMatcher": []
+      }, {
+
+        "label": "Build All Tests",
+        "type": "shell",
+        "command": "./scripts/build.sh --build_type=debug --build_tests=ON && ./scripts/build.sh --build_type=release --build_tests=ON",
+        "group": "build",
+        "dependsOn": [
+            "Test: Build (release)"
+        ],
+        "problemMatcher": []
+      }
+
+  ]
+}
